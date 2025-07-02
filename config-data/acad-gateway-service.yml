@@ -29,25 +29,25 @@ spring:
           enabled: true
       routes:
         - id: acad-Institucion
-        - uri: lb://acad-Institucion
-        - predicates:
-        - Path=/institucion/**
-        - filters:
-        - AuthFilter
+          uri: lb://acad-Institucion
+          predicates:
+            - Path=/institucion/**
+          filters:
+            - AuthFilter
 
         - id: acad-ugel
-        - uri: lb://acad-ugel
-        - predicates:
-        - Path=/ugeles/**
-        - filters:
-        - AuthFilter
+          uri: lb://acad-ugel
+          predicates:
+            - Path=/ugeles/**
+          filters:
+            - AuthFilter
 
         - id: acad-Sede
-        - uri: lb://acad-Sede
-        - predicates:
-        - Path=/sedes/**
-        - filters:
-        - AuthFilter
+          uri: lb://acad-Sede
+          predicates:
+            - Path=/sedes/**
+          filters:
+            - AuthFilter
 
         - id: asistencia-route
           uri: lb://acad-asistencia-service
