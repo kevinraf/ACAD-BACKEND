@@ -49,4 +49,25 @@ public class DocenteControlador {
         servicio.eliminar(id);
         return ResponseEntity.noContent().build();
     }
+    // DEMAS FUNCIONALIDADES DE RPOCITORIO ----------------------
+
+    @GetMapping("/dni/{dni}")
+    public ResponseEntity<List<Docente>> buscarPorDni(@PathVariable String dni) {
+        return ResponseEntity.ok(servicio.buscarPorDni(dni));
+    }
+
+    @GetMapping("/cargo/{cargo}")
+    public ResponseEntity<List<Docente>> buscarPorCargo(@PathVariable String cargo) {
+        return ResponseEntity.ok(servicio.buscarPorCargo(cargo));
+    }
+
+    @GetMapping("/antiguedad/menor-a-5")
+    public ResponseEntity<List<Docente>> buscarMenorA5() {
+        return ResponseEntity.ok(servicio.buscarPorAntiguedadMenorA5());
+    }
+
+    @GetMapping("/antiguedad/mayor-a-5")
+    public ResponseEntity<List<Docente>> buscarMayorA5() {
+        return ResponseEntity.ok(servicio.buscarPorAntiguedadMayorA5());
+    }
 }

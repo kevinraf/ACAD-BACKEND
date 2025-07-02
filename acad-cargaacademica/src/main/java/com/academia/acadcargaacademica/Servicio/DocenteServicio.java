@@ -12,4 +12,10 @@ public interface DocenteServicio {
     Docente modificar(Long id, Docente docente);
     void eliminar(Long id);
 
+
+    List<Docente> buscarPorDni(String dni);
+    List<Docente> buscarPorCargo(String cargo);
+    List<Docente> buscarPorAntiguedadMenorA5();
+    List<Docente> buscarPorAntiguedadMayorA5();
+
 }

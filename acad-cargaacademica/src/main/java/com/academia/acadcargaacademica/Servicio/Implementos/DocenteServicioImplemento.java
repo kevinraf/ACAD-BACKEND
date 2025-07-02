@@ -42,5 +42,28 @@ public class DocenteServicioImplemento implements DocenteServicio {
     public void eliminar(Long id) {
         repositorio.deleteById(id);
     }
+
+    // --- las demas funcionalidades  ---
+
+    @Override
+    public List<Docente> buscarPorDni(String dni) {
+        return repositorio.findByDniDocente(dni);
+    }
+
+    @Override
+    public List<Docente> buscarPorCargo(String cargo) {
+        return repositorio.findByCargoDocente(cargo);
+    }
+
+    @Override
+    public List<Docente> buscarPorAntiguedadMenorA5() {
+        return repositorio.findByAntiguedadDocenteLessThan("5");
+    }
+
+    @Override
+    public List<Docente> buscarPorAntiguedadMayorA5() {
+        return repositorio.findByAntiguedadDocenteGreaterThan("5");
+    }
+
 }
 

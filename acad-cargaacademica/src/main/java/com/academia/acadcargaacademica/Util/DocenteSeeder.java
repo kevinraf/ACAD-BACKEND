@@ -36,7 +36,7 @@ public class DocenteSeeder implements CommandLineRunner {
                 String estado = ESTADOS[random.nextInt(ESTADOS.length)];
                 String cargo = CARGOS[random.nextInt(CARGOS.length)];
                 String dni = String.valueOf(10000000 + random.nextInt(89999999)); // 8 dígitos
-                String antiguedad = (1 + random.nextInt(20)) + " años"; // entre 1 y 20 años
+                String antiguedad = (1 + random.nextInt(20)) + ""; // entre 1 y 20 años
 
                 Docente docente = Docente.builder()
                         .nombreDocente(nombre)
