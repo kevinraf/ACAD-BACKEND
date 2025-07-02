@@ -26,6 +26,7 @@ public class Docente {
     private String estadoDocente;
     private String cargoDocente;
     private String dniDocente;
-    private String antiguedadDocente;
+    private Integer antiguedadDocente;
+
 
 }

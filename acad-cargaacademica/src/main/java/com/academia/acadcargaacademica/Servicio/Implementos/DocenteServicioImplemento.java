@@ -47,23 +47,26 @@ public class DocenteServicioImplemento implements DocenteServicio {
 
     @Override
     public List<Docente> buscarPorDni(String dni) {
-        return repositorio.findByDniDocente(dni);
+        return repositorio.findByDniDocenteContainingIgnoreCase(dni); // sin condición de longitud
     }
 
     @Override
     public List<Docente> buscarPorCargo(String cargo) {
-        return repositorio.findByCargoDocente(cargo);
+        return repositorio.findByCargoDocenteContainingIgnoreCase(cargo);
     }
+
 
     @Override
     public List<Docente> buscarPorAntiguedadMenorA5() {
-        return repositorio.findByAntiguedadDocenteLessThan("5");
+        return repositorio.findByAntiguedadDocenteLessThanEqual(5);
     }
 
     @Override
     public List<Docente> buscarPorAntiguedadMayorA5() {
-        return repositorio.findByAntiguedadDocenteGreaterThan("5");
+        return repositorio.findByAntiguedadDocenteGreaterThanEqual(5);
     }
+
+
 
 }
 

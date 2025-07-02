@@ -7,15 +7,14 @@ import java.util.List;
 
 public interface DocenteRepositorio extends JpaRepository<Docente, Long> {
 
-    // Buscar por DNI
-    List<Docente> findByDniDocente(String dniDocente);
+    // Buscar por coincidencia parcial en DNI (mínimo 4 letras)
+    List<Docente> findByDniDocenteContainingIgnoreCase(String parteDni);
 
-    // Buscar por Cargo
-    List<Docente> findByCargoDocente(String cargoDocente);
+    // Buscar por coincidencia parcial en cargo
+    List<Docente> findByCargoDocenteContainingIgnoreCase(String parteCargo);
 
-    // Buscar por antigüedad menor a 5 años (recordando que es un String)
-    List<Docente> findByAntiguedadDocenteLessThan(String antiguedad);
+    // Antigüedad numérica
+    List<Docente> findByAntiguedadDocenteLessThanEqual(Integer valor);    // incluye el 5
+    List<Docente> findByAntiguedadDocenteGreaterThanEqual(Integer valor); // incluye el 5
 
-    // Buscar por antigüedad mayor a 5 años
-    List<Docente> findByAntiguedadDocenteGreaterThan(String antiguedad);
 }
