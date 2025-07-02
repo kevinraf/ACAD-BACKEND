@@ -95,3 +95,23 @@ spring:
             - Path=/matriculas/**
           filters:
             - AuthFilter
+
+
+        - id: acad-cargaacademica
+          uri: lb://acad-cargaacademica
+          predicates:
+            - Path=/cursos/**
+          filters:
+            - AuthFilter
+        - id: acad-cargaacademica
+          uri: lb://acad-cargaacademica
+          predicates:
+            - Path=/docentes/**
+          filters:
+            - AuthFilter
+        - id: acad-cargaacademica
+          uri: lb://acad-cargaacademica
+          predicates:
+            - Path=/planAcademicos/**
+          filters:
+            - AuthFilter
