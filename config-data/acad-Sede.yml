@@ -1,0 +1,38 @@
+server:
+  # Puerto configurado para el servicio, puede tomar variables de entorno PORT o SERVER_PORT, o 0 para asignación dinámica
+  port: ${PORT:${SERVER_PORT:0}}
+
+spring:
+  application:
+    name: acad-Sede  # Nombre del servicio para Eureka y logs
+
+  datasource:
+    url: jdbc:h2:mem:acad_Sede_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: root
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # Actualiza esquema automáticamente
+    show-sql: true      # Muestra las consultas SQL en consola
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console   # Ruta para acceder a la consola H2 en el navegador
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html  # Ruta para acceder a Swagger UI
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}  # URL de Eureka server, configurable con variable de entorno
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}  # ID único de la instancia

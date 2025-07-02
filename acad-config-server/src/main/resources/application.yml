@@ -1,0 +1,18 @@
+server:
+  port: 7070
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/kevinraf/ACAD-BACKEND.git
+          searchPaths: config-data
+          default-label: main
+  security:
+    user:
+
+      name: root
+      password: 123456

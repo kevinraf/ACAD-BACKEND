@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: acad-antecedenteMedico-service
+  profiles:
+    active: development
+  config:
+    import: optional:configserver:http://elvis:123456@localhost:7070

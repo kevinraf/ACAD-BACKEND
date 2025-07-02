@@ -1,0 +1,97 @@
+server:
+  port: 8085
+
+eureka:
+  client:
+    serviceUrl:
+      #defaultZone: http://localhost:8090/eureka
+      defaultZone: ${EUREKA_URI:http://localhost:8090/eureka}
+
+  instance:
+    #hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: acad-Institucion
+        - uri: lb://acad-Institucion
+        - predicates:
+        - Path=/institucion/**
+        - filters:
+        - AuthFilter
+
+        - id: acad-ugel
+        - uri: lb://acad-ugel
+        - predicates:
+        - Path=/ugeles/**
+        - filters:
+        - AuthFilter
+
+        - id: acad-Sede
+        - uri: lb://acad-Sede
+        - predicates:
+        - Path=/sedes/**
+        - filters:
+        - AuthFilter
+
+        - id: asistencia-route
+          uri: lb://acad-asistencia-service
+          predicates:
+            - Path=/asistencias/**
+          filters:
+            - AuthFilter
+
+        - id: insidenciaHistorico-route
+          uri: lb://acad-insidenciaHistorico-service
+          predicates:
+            - Path=/api/insidencias/**
+          filters:
+            - AuthFilter
+
+        - id: acad-apoderado-service
+          uri: lb://acad-apoderado-service
+          predicates:
+            - Path=/apoderados/**
+          filters:
+            - AuthFilter
+
+        - id: acad-antecedenteMedico-service
+          uri: lb://acad-antecedenteMedico-service
+          predicates:
+            - Path=/antecedentes-medicos/**
+          filters:
+            - AuthFilter
+
+        - id: acad-requisito-service
+          uri: lb://acad-requisito-service
+          predicates:
+            - Path=/requisitos/**
+          filters:
+            - AuthFilter
+
+        - id: acad-auth-service
+          uri: lb://acad-auth-service
+          predicates:
+            - Path=/auth/**
+
+        - id: acad-matricula-service
+          uri: lb://acad-matricula-service
+          predicates:
+            - Path=/matriculas/**
+          filters:
+            - AuthFilter
