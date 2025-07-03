@@ -2,11 +2,13 @@ package com.acad.matriculaservice.Controller;
 
 import com.acad.matriculaservice.Entity.Matricula;
 import com.acad.matriculaservice.Service.MatriculaServicio;
+import com.acad.matriculaservice.Util.MatriculaPdfGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -58,5 +60,21 @@ public class MatriculaControlador {
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         matriculaServicio.eliminar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // ✅ Exportar a PDF
+    @GetMapping("/exportar-pdf")
+    public ResponseEntity<byte[]> exportarPdf() throws IOException {
+        List<Matricula> matriculas = matriculaServicio.listar();
+        ByteArrayInputStream pdf = MatriculaPdfGenerator.generarPdf(matriculas);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=matriculas.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf.readAllBytes());
     }
 }
