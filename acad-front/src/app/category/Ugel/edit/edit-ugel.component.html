@@ -1,0 +1,17 @@
+<form [formGroup]="ugelForm" (ngSubmit)="guardar()" class="card p-4 shadow-sm mb-4" style="background-color: #E0E1DD;">
+  <h5 class="text-center mb-3 text-primary fw-bold">Editar UGEL</h5>
+
+  <div class="mb-3">
+    <label for="nombreDeLaUgel" class="form-label fw-semibold">Nombre de la UGEL:</label>
+    <input id="nombreDeLaUgel" type="text" formControlName="nombreDeLaUgel" class="form-control" placeholder="Ej: UGEL San Román">
+  </div>
+
+  <div class="text-end mt-4">
+    <button type="submit" class="btn btn-primary me-2" [disabled]="ugelForm.invalid">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+<div class="container mt-4 mb-4">
+  <h2 class="text-center mb-4">Editar Curso</h2>
+  <hr>
+  <form [formGroup]="cursoForm" (ngSubmit)="guardar()">
+    <div class="mb-3">
+      <label for="nombreCurso" class="form-label fw-semibold">Nombre del Curso</label>
+      <input id="nombreCurso" type="text" formControlName="nombreCurso" class="form-control form-control-custom-bg" placeholder="Ingrese el nombre del curso" />
+    </div>
+
+    <div class="mb-3">
+      <label for="descripcionCurso" class="form-label fw-semibold">Descripción</label>
+      <input id="descripcionCurso" type="text" formControlName="descripcionCurso" class="form-control form-control-custom-bg" placeholder="Ingrese una descripción del curso" />
+    </div>
+
+    <div class="mb-4">
+      <label for="horasSemanalesCurso" class="form-label fw-semibold">Horas Semanales:</label>
+      <input id="horasSemanalesCurso" type="text" formControlName="horasSemanalesCurso" class="form-control form-control-custom-bg" placeholder="Ej: 4 horas" />
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="cursoForm.invalid">Guardar</button>
+    </div>
+  </form>
+</div>

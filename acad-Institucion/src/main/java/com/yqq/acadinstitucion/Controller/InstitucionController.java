@@ -1,33 +1,53 @@
 package com.yqq.acadinstitucion.Controller;
 
-import com.yqq.acadinstitucion.Dto.InstitucionDto;
+import com.yqq.acadinstitucion.Dto.InstitucionResponse;
 import com.yqq.acadinstitucion.Entity.Institucion;
-import com.yqq.acadinstitucion.Servicio.InstitucionServicio;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import com.yqq.acadinstitucion.Servicio.InstitucionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/instituciones")
-@RequiredArgsConstructor
+@RequestMapping("/institucion")
 public class InstitucionController {
 
-    private final InstitucionServicio servicio;
+    @Autowired
+    private InstitucionService institucionService;
 
+    // Crear institución
     @PostMapping
-    public ResponseEntity<InstitucionDto> save(@RequestBody Institucion institucion) {
-        return ResponseEntity.ok(servicio.save(institucion));
+    public Institucion crear(@RequestBody Institucion institucion) {
+        return institucionService.save(institucion);
     }
 
+    // Listar todas las instituciones
     @GetMapping
-    public ResponseEntity<List<InstitucionDto>> getAll() {
-        return ResponseEntity.ok(servicio.getAll());
+    public List<Institucion> listar() {
+        return institucionService.listar();
     }
 
+    // Buscar institución por ID
     @GetMapping("/{id}")
-    public ResponseEntity<InstitucionDto> getById(@PathVariable Integer id) {
-        return ResponseEntity.ok(servicio.getById(id));
+    public Institucion buscarPorId(@PathVariable Long id) {
+        return institucionService.buscar(id);
+    }
+
+    // Actualizar institución
+    @PutMapping
+    public Institucion actualizar(@RequestBody Institucion institucion) {
+        return institucionService.actualizar(institucion);
+    }
+
+    // Eliminar institución por ID
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        institucionService.eliminar(id);
+    }
+
+    // Buscar instituciones por nombre (usando DTO + Feign)
+    @GetMapping("/buscar")
+    public List<InstitucionResponse> buscarPorNombre(@RequestParam String nombre) {
+        return institucionService.findByNombre(nombre);
     }
 }

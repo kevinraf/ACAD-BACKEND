@@ -1,0 +1,57 @@
+<form [formGroup]="matriculaForm" (ngSubmit)="guardar()" class="card p-4 shadow-sm mb-4" style="background-color: #E0E1DD;">
+  <h5 class="text-center mb-3 text-primary fw-bold">Nueva Matrícula</h5>
+  <div class="mb-3">
+    <span class="fw-semibold">Formulario de Matrícula:</span> <small class="text-muted">Complete los datos requeridos</small>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Plan Académico:</label>
+      <select formControlName="planAcademico" class="form-control">
+        <option value="">Seleccione el plan académico</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Institución:</label>
+      <input type="text" formControlName="institucion" class="form-control" placeholder="Ingrese la institución">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Usuario:</label>
+      <input type="text" formControlName="usuario" class="form-control" placeholder="Ingrese el usuario responsable">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Código de Matrícula:</label>
+      <input type="text" formControlName="codigoMatricula" class="form-control" placeholder="Ingrese el código de matrícula">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Nivel:</label>
+      <input type="text" formControlName="nivel" class="form-control" placeholder="Ej: Inicial, Primaria, Secundaria">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Requisito Asociado:</label>
+      <select class="form-select" formControlName="idRequisitos">
+        <option [ngValue]="null">Seleccione un requisito</option>
+        <option *ngFor="let r of requisitos" [ngValue]="r.idRequisitos">
+          DNI: {{ r.dniEstudiante }} - Apoderado: {{ r.apoderado?.nombres }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="text-end mt-4">
+    <button type="submit" class="btn btn-primary me-2" [disabled]="matriculaForm.invalid">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+</form>

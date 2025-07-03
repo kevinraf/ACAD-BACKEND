@@ -1,0 +1,46 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Gestión de Planes Académicos</h2>
+    <button class="btn btn-primary" (click)="mostrarFormularioNuevo()">
+      {{ nuevoVisible ? 'Cancelar' : 'Nuevo Plan Académico' }}
+    </button>
+  </div>
+
+  <app-new-planacademico
+    *ngIf="nuevoVisible"
+    (onGuardar)="onNuevoGuardado()"
+    (onCancelar)="mostrarFormularioNuevo()"
+  ></app-new-planacademico>
+
+  <div class="table-responsive mt-4" *ngIf="planes.length > 0">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Estado</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let plan of planes">
+        <td>{{ plan.nombrePlanacademico }}</td>
+        <td>{{ plan.descripcionPlanacademico }}</td>
+        <td>{{ plan.estadoPlanacademico }}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(plan.idPlanacademico)">
+            <i class="bi bi-pencil"></i> Editar
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="eliminar(plan.idPlanacademico)">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="planes.length === 0" class="alert alert-info text-center mt-4">
+    No hay planes académicos registrados.
+  </div>
+</div>

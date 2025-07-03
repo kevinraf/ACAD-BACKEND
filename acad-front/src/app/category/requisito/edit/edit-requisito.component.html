@@ -1,0 +1,80 @@
+<div class="container mt-4 mb-4">
+  <h2 class="text-center mb-4">Editar Requisito</h2>
+  <hr>
+  <form [formGroup]="requisitoForm" (ngSubmit)="guardar()">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="dniEstudiante" class="form-label fw-semibold">DNI del Estudiante</label>
+        <input id="dniEstudiante" formControlName="dniEstudiante" class="form-control form-control-custom-bg" placeholder="Ingrese el DNI del estudiante" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="partidaNacimientoOriginal" class="form-label fw-semibold">Partida de Nacimiento Original</label>
+        <input id="partidaNacimientoOriginal" formControlName="partidaNacimientoOriginal" class="form-control form-control-custom-bg" placeholder="Ingrese partida de nacimiento" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="resolucionRectoralDeTraslado" class="form-label fw-semibold">Resolución Rectoral de Traslado</label>
+        <input id="resolucionRectoralDeTraslado" formControlName="resolucionRectoralDeTraslado" class="form-control form-control-custom-bg" placeholder="Ingrese resolución rectoral" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="certificadoDeEstudio" class="form-label fw-semibold">Certificado de Estudio</label>
+        <input id="certificadoDeEstudio" formControlName="certificadoDeEstudio" class="form-control form-control-custom-bg" placeholder="Ingrese certificado de estudio" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="fichaMatriculaGeneradoPorSIAGE" class="form-label fw-semibold">Ficha Matrícula Generado por SIAGE</label>
+        <input id="fichaMatriculaGeneradoPorSIAGE" formControlName="fichaMatriculaGeneradoPorSIAGE" class="form-control form-control-custom-bg" placeholder="Ingrese ficha SIAGE" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="constanciaDeComportamiento" class="form-label fw-semibold">Constancia de Comportamiento</label>
+        <input id="constanciaDeComportamiento" formControlName="constanciaDeComportamiento" class="form-control form-control-custom-bg" placeholder="Ingrese constancia de comportamiento" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="constanciaDeNoAdeudo" class="form-label fw-semibold">Constancia de No Adeudo</label>
+        <input id="constanciaDeNoAdeudo" formControlName="constanciaDeNoAdeudo" class="form-control form-control-custom-bg" placeholder="Ingrese constancia de no adeudo" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="familiarMilitar" class="form-label fw-semibold">Familiar Militar</label>
+        <input id="familiarMilitar" formControlName="familiarMilitar" class="form-control form-control-custom-bg" placeholder="Ingrese información militar (si aplica)" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="idApoderado" class="form-label fw-semibold">Apoderado</label>
+        <select id="idApoderado" formControlName="idApoderado" class="form-select form-control-custom-bg">
+          <option [ngValue]="null">Seleccione un apoderado</option>
+          <option *ngFor="let a of apoderados" [ngValue]="a.idApoderado">
+            {{ a.nombres }} {{ a.apellidoPaterno }} {{ a.apellidoMaterno }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="idAntecedenteMedico" class="form-label fw-semibold">Antecedente Médico</label>
+        <select id="idAntecedenteMedico" formControlName="idAntecedenteMedico" class="form-select form-control-custom-bg">
+          <option [ngValue]="null">Seleccione un antecedente médico</option>
+          <option *ngFor="let m of antecedentesMedicos" [ngValue]="m.idAntecedenteMedico">
+            Grupo: {{ m.grupoSanguineo }} | Edad: {{ m.edad }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>

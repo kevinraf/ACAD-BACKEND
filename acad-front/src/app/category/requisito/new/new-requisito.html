@@ -1,0 +1,77 @@
+<form [formGroup]="requisitoForm" (ngSubmit)="guardar()" class="card p-4 shadow-sm mb-4" style="background-color: #E0E1DD;">
+  <h5 class="text-center mb-3 text-primary fw-bold">Nuevo requisito</h5>
+  <div class="mb-3">
+    <span class="fw-semibold">Formulario de requisito:</span> <small class="text-muted">Complete los datos</small>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">DNI del Estudiante:</label>
+      <input type="text" formControlName="dniEstudiante" class="form-control" placeholder="Ingrese el DNI del estudiante">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Partida de Nacimiento Original:</label>
+      <input type="text" formControlName="partidaNacimientoOriginal" class="form-control" placeholder="Ingrese partida de nacimiento">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Resolución Rectoral de Traslado:</label>
+      <input type="text" formControlName="resolucionRectoralDeTraslado" class="form-control" placeholder="Ingrese resolución rectoral">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Certificado de Estudio:</label>
+      <input type="text" formControlName="certificadoDeEstudio" class="form-control" placeholder="Ingrese certificado de estudio">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Ficha Matrícula (SIAGE):</label>
+      <input type="text" formControlName="fichaMatriculaGeneradoPorSIAGE" class="form-control" placeholder="Ingrese ficha SIAGE">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Constancia de Comportamiento:</label>
+      <input type="text" formControlName="constanciaDeComportamiento" class="form-control" placeholder="Ingrese constancia">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Constancia de No Adeudo:</label>
+      <input type="text" formControlName="constanciaDeNoAdeudo" class="form-control" placeholder="Ingrese constancia">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Familiar Militar:</label>
+      <input type="text" formControlName="familiarMilitar" class="form-control" placeholder="Ingrese si aplica">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Apoderado:</label>
+      <select class="form-select" formControlName="idApoderado">
+        <option [ngValue]="null">Seleccione un apoderado</option>
+        <option *ngFor="let a of apoderados" [ngValue]="a.idApoderado">
+          {{ a.nombres }} {{ a.apellidoPaterno }} {{ a.apellidoMaterno }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Antecedente Médico:</label>
+      <select class="form-select" formControlName="idAntecedenteMedico">
+        <option [ngValue]="null">Seleccione antecedente médico</option>
+        <option *ngFor="let m of antecedentesMedicos" [ngValue]="m.idAntecedenteMedico">
+          Grupo: {{ m.grupoSanguineo }} | Edad: {{ m.edad }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="text-end mt-4">
+    <button type="submit" class="btn btn-primary me-2" [disabled]="requisitoForm.invalid">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+</form>

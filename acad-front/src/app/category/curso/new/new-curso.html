@@ -1,0 +1,19 @@
+<form [formGroup]="cursoForm" (ngSubmit)="guardar()">
+  <div>
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombreCurso" />
+  </div>
+
+  <div>
+    <label>Descripción:</label>
+    <input type="text" formControlName="descripcionCurso" />
+  </div>
+
+  <div>
+    <label>Horas Semanales:</label>
+    <input type="text" formControlName="horasSemanalesCurso" />
+  </div>
+
+  <button type="submit" [disabled]="cursoForm.invalid">Guardar</button>
+  <button type="button" (click)="cancelar()">Cancelar</button>
+</form>

@@ -1,0 +1,51 @@
+<form [formGroup]="docenteForm" (ngSubmit)="guardar()" class="card p-4 shadow-sm mb-4" style="background-color: #E0E1DD;">
+  <h5 class="text-center mb-3 text-primary fw-bold">Nuevo Docente</h5>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Nombres:</label>
+      <input type="text" formControlName="nombreDocente" class="form-control" placeholder="Ingrese el nombre">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Apellido Paterno:</label>
+      <input type="text" formControlName="apellidoPaternoDocente" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Apellido Materno:</label>
+      <input type="text" formControlName="apellidoMaternoDocente" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Correo:</label>
+      <input type="email" formControlName="correoDocente" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Teléfono:</label>
+      <input type="text" formControlName="telefonoDocente" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Estado:</label>
+      <select class="form-select" formControlName="estadoDocente">
+        <option value="">Seleccione</option>
+        <option value="ACTIVO">ACTIVO</option>
+        <option value="INACTIVO">INACTIVO</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Cargo:</label>
+      <input type="text" formControlName="cargoDocente" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">DNI:</label>
+      <input type="text" formControlName="dniDocente" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Antigüedad (años):</label>
+      <input type="number" formControlName="antiguedadDocente" class="form-control">
+    </div>
+  </div>
+
+  <div class="text-end mt-4">
+    <button type="submit" class="btn btn-primary me-2" [disabled]="docenteForm.invalid">Guardar</button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>

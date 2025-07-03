@@ -43,13 +43,43 @@ public class AsistenciaServiceImpl implements AsistenciaService {
     public List<Asistencia> listar() {
         return asistenciaRepository.findAll().stream()
                 .map(asistencia -> {
-                    asistencia.setUsuarioNombre(obtenerUsuarioNombre(asistencia.getUsuarioIdUsuario().intValue()));
-                    asistencia.setCursoNombre(obtenerCursoNombre(asistencia.getCursoIdCurso()));
-                    asistencia.setDocenteNombre(obtenerDocenteNombre(asistencia.getDocenteIdDocente()));
-                    asistencia.setPlanAcademicoNombre(obtenerPlanAcademicoNombre(asistencia.getPlanAcademicoIdPlanAcademico()));
+                    // Usuario
+                    if (asistencia.getUsuarioIdUsuario() != null) {
+                        String usuarioNombre = obtenerUsuarioNombre(asistencia.getUsuarioIdUsuario().intValue());
+                        asistencia.setUsuarioNombre(usuarioNombre);
+                    }
+                    // Curso
+                    if (asistencia.getCursoIdCurso() != null) {
+                        String cursoNombre = obtenerCursoNombre(asistencia.getCursoIdCurso());
+                        asistencia.setCursoNombre(cursoNombre);
+                    }
+                    // Docente
+                    if (asistencia.getDocenteIdDocente() != null) {
+                        String docenteNombre = obtenerDocenteNombre(asistencia.getDocenteIdDocente());
+                        asistencia.setDocenteNombre(docenteNombre);
+                    }
+                    // Plan académico
+                    if (asistencia.getPlanAcademicoIdPlanAcademico() != null) {
+                        String planNombre = obtenerPlanAcademicoNombre(asistencia.getPlanAcademicoIdPlanAcademico());
+                        asistencia.setPlanAcademicoNombre(planNombre);
+                    }
                     return asistencia;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Asistencia> listarPorId(Integer id) {
+        Optional<Asistencia> asistenciaOptional = asistenciaRepository.findById(id);
+        if (asistenciaOptional.isPresent()) {
+            Asistencia asistencia = asistenciaOptional.get();
+            asistencia.setUsuarioNombre(obtenerUsuarioNombre(asistencia.getUsuarioIdUsuario().intValue()));
+            asistencia.setCursoNombre(obtenerCursoNombre(asistencia.getCursoIdCurso()));
+            asistencia.setDocenteNombre(obtenerDocenteNombre(asistencia.getDocenteIdDocente()));
+            asistencia.setPlanAcademicoNombre(obtenerPlanAcademicoNombre(asistencia.getPlanAcademicoIdPlanAcademico()));
+            return Optional.of(asistencia);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -72,19 +102,7 @@ public class AsistenciaServiceImpl implements AsistenciaService {
         return asistenciaActualizada;
     }
 
-    @Override
-    public Optional<Asistencia> listarPorId(Integer id) {
-        Optional<Asistencia> asistenciaOptional = asistenciaRepository.findById(id);
-        if (asistenciaOptional.isPresent()) {
-            Asistencia asistencia = asistenciaOptional.get();
-            asistencia.setUsuarioNombre(obtenerUsuarioNombre(asistencia.getUsuarioIdUsuario().intValue()));
-            asistencia.setCursoNombre(obtenerCursoNombre(asistencia.getCursoIdCurso()));
-            asistencia.setDocenteNombre(obtenerDocenteNombre(asistencia.getDocenteIdDocente()));
-            asistencia.setPlanAcademicoNombre(obtenerPlanAcademicoNombre(asistencia.getPlanAcademicoIdPlanAcademico()));
-            return Optional.of(asistencia);
-        }
-        return Optional.empty();
-    }
+
 
     @Override
     public void eliminarPorId(Integer id) {
@@ -94,12 +112,14 @@ public class AsistenciaServiceImpl implements AsistenciaService {
 
     private String obtenerUsuarioNombre(Integer idUsuario) {
         try {
-            AuthUser au = usuarioFeign.buscarAuthUser(idUsuario)
-                    .getBody();
-            return (au != null) ? au.getUser() : "Usuario no encontrado";
+            AuthUser authUser = usuarioFeign.buscarAuthUser(idUsuario).getBody();
+            if (authUser != null) {
+                return authUser.getUser();
+            }
         } catch (Exception e) {
-            return "Servicio no disponible de usuario";
+            return "Usuario no encontrado";
         }
+        return null;
     }
 
     private String obtenerCursoNombre(Integer idCurso) {
@@ -139,12 +159,12 @@ public class AsistenciaServiceImpl implements AsistenciaService {
     }
 
     // Helper para enriquecer nombres
-    private Asistencia enriquecer(Asistencia a) {
-        a.setUsuarioNombre(obtenerUsuarioNombre(a.getUsuarioIdUsuario().intValue()));
-        a.setCursoNombre(obtenerCursoNombre(a.getCursoIdCurso()));
-        a.setDocenteNombre(obtenerDocenteNombre(a.getDocenteIdDocente()));
-        a.setPlanAcademicoNombre(obtenerPlanAcademicoNombre(a.getPlanAcademicoIdPlanAcademico()));
-        return a;
+    private Asistencia enriquecer(Asistencia asistencia) {
+        asistencia.setUsuarioNombre(obtenerUsuarioNombre(asistencia.getUsuarioIdUsuario().intValue()));
+        asistencia.setCursoNombre(obtenerCursoNombre(asistencia.getCursoIdCurso()));
+        asistencia.setDocenteNombre(obtenerDocenteNombre(asistencia.getDocenteIdDocente()));
+        asistencia.setPlanAcademicoNombre(obtenerPlanAcademicoNombre(asistencia.getPlanAcademicoIdPlanAcademico()));
+        return asistencia;
     }
 
     @Override

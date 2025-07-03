@@ -1,0 +1,94 @@
+:host {
+  display: block;
+  height: 100vh;
+  background-color: #E0E1DD;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.dashboard-layout {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #0D1B2A;
+  color: #E0E1DD;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #E0E1DD;
+    text-align: center;
+  }
+
+  .nav-link {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #A9BCD0;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: #1B263B;
+      color: #E0E1DD;
+    }
+
+    &.active {
+      background-color: #415A77;
+      color: #E0E1DD;
+    }
+  }
+
+  .btn-outline-light {
+    font-weight: 500;
+    color: #E0E1DD;
+    border-color: #E0E1DD;
+
+    &:hover {
+      background-color: #1B263B;
+      border-color: #E0E1DD;
+    }
+
+    i {
+      transition: transform 0.2s ease;
+    }
+  }
+
+  .submenu {
+    animation: fadeIn 0.3s ease-in-out;
+    .nav-link {
+      font-size: 0.95rem;
+      padding-left: 1.5rem;
+    }
+  }
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #E0E1DD;
+  color: #1B263B;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+// Animación opcional
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

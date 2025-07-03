@@ -6,13 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Random; // Necesitamos esto para números aleatorios
+import java.util.Random;
 
 @Component
 public class AsistenciaSeeder implements CommandLineRunner {
 
     private final AsistenciaRepository asistenciaRepository;
-    private final Random random = new Random(); // Instancia de Random
+    private final Random random = new Random();
 
     // Estados de asistencia posibles
     private static final String[] ESTADOS = {"PRESENTE", "FALTA", "TARDANZA"};
@@ -26,7 +26,8 @@ public class AsistenciaSeeder implements CommandLineRunner {
         if (asistenciaRepository.count() == 0) {
             System.out.println("Insertando datos de asistencias...");
 
-            for (int i = 0; i < 10; i++) { // Bucle para insertar 10 registros
+            // Bucle para insertar 30 registros
+            for (int i = 0; i < 30; i++) {
                 Asistencia asistencia = new Asistencia();
 
                 // 1. Generar fecha de registro aleatoria (ej. dentro de los últimos 30 días)
@@ -37,11 +38,15 @@ public class AsistenciaSeeder implements CommandLineRunner {
                         .minusSeconds(random.nextInt(60)); // Segundos aleatorios
                 asistencia.setFechaRegistroAsistencia(randomDate);
 
-                // 2. Generar IDs de usuario, curso, docente, planAcademico aleatorios (puedes ajustar los rangos)
-                asistencia.setUsuarioIdUsuario(1L + random.nextInt(5)); // Usuarios del 1 al 5
-                asistencia.setCursoIdCurso(1 + random.nextInt(3));    // Cursos del 1 al 3
-                asistencia.setDocenteIdDocente(4 + random.nextInt(3)); // Docentes del 4 al 6
-                asistencia.setPlanAcademicoIdPlanAcademico(7 + random.nextInt(3)); // Planes del 7 al 9
+                // 2. Generar IDs de usuario, curso, docente, planAcademico aleatorios
+                // Usuarios del 1 al 5 (random.nextInt(5) genera 0-4; +1 para 1-5)
+                asistencia.setUsuarioIdUsuario(1L + random.nextInt(5));
+                // Cursos del 1 al 10 (random.nextInt(10) genera 0-9; +1 para 1-10)
+                asistencia.setCursoIdCurso(1 + random.nextInt(10));
+                // Docentes del 4 al 6 (se mantiene el rango de ejemplo, random.nextInt(3) genera 0-2; +4 para 4-6)
+                asistencia.setDocenteIdDocente(4 + random.nextInt(3));
+                // Planes del 7 al 9 (se mantiene el rango de ejemplo, random.nextInt(3) genera 0-2; +7 para 7-9)
+                asistencia.setPlanAcademicoIdPlanAcademico(7 + random.nextInt(3));
 
                 // 3. Seleccionar un estado de asistencia aleatorio
                 String randomEstado = ESTADOS[random.nextInt(ESTADOS.length)];
@@ -50,7 +55,7 @@ public class AsistenciaSeeder implements CommandLineRunner {
                 asistenciaRepository.save(asistencia);
             }
 
-            System.out.println("10 datos de asistencias aleatorios insertados correctamente.");
+            System.out.println("30 datos de asistencias aleatorios insertados correctamente.");
         } else {
             System.out.println("Las asistencias ya existen, no se insertaron datos.");
         }

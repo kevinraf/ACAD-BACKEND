@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <div class="mb-3 text-end">
+    <button class="btn btn-success" (click)="mostrarFormularioNuevo()">Agregar nuevo docente</button>
+    <form class="row g-3 mb-4">
+
+      <div class="col-md-3">
+        <input type="text" [(ngModel)]="filtroDni" name="dni" class="form-control" placeholder="Buscar por DNI">
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-primary w-100" (click)="buscarPorDni()">Filtrar por DNI</button>
+      </div>
+
+      <div class="col-md-3">
+        <input type="text" [(ngModel)]="filtroCargo" name="cargo" class="form-control" placeholder="Buscar por Cargo">
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-primary w-100" (click)="buscarPorCargo()">Filtrar por Cargo</button>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-info w-100" (click)="buscarAntiguedadMenorA5()">Antigüedad < 5 años</button>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-info w-100" (click)="buscarAntiguedadMayorA5()">Antigüedad ≥ 5 años</button>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-secondary w-100" (click)="cargarDocentes()">Limpiar Filtros</button>
+      </div>
+    </form>
+
+  </div>
+
+  <app-new-docente *ngIf="nuevoDocenteVisible"
+                   (onGuardar)="onNuevoGuardado()"
+                   (onCancelar)="mostrarFormularioNuevo()"></app-new-docente>
+
+  <div class="table-responsive">
+
+    <table class="table clean-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>DNI</th>
+        <th>Correo</th>
+        <th>Cargo</th>
+        <th>Antigüedad</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (docente of docentes; track docente?.idDocente) {
+          <tr>
+            <td>{{ docente.idDocente }}</td>
+            <td>{{ docente.nombreDocente }}</td>
+            <td>{{ docente.apellidoPaternoDocente }} {{ docente.apellidoMaternoDocente }}</td>
+            <td>{{ docente.dniDocente }}</td>
+            <td>{{ docente.correoDocente }}</td>
+            <td>{{ docente.cargoDocente }}</td>
+            <td>{{ docente.antiguedadDocente }} años</td>
+            <td>{{ docente.estadoDocente }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(docente.idDocente)">Editar</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="eliminar(docente.idDocente)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="9" class="text-center">No hay docentes registrados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

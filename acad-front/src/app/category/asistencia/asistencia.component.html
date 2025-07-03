@@ -1,0 +1,188 @@
+<!-- Botones de navegación -->
+<div class="mb-3 text-end">
+  <button class="btn btn-primary me-2" (click)="showListView()">Listar Asistencias</button>
+  <button class="btn btn-success"     (click)="showAddForm()">Nueva Asistencia</button>
+</div>
+
+<!-- ==== LIST VIEW ==== -->
+<div *ngIf="showList">
+  <form [formGroup]="filtrosForm" class="filters-container">
+    <div class="filter-row">
+      <label for="usuario">Buscar Usuario:</label>
+      <input id="usuario" type="text" formControlName="usuario">
+      <button type="button" (click)="buscarPorUsuario()">Buscar</button>
+    </div>
+    <div class="filter-row">
+      <label for="curso">Buscar Curso:</label>
+      <select id="curso" formControlName="curso">
+        <option value="">-- Todos --</option>
+        <option *ngFor="let c of cursos" [value]="c">{{ c }}</option>
+      </select>
+      <button type="button" (click)="buscarPorCurso()">Buscar</button>
+    </div>
+    <div class="filter-row">
+      <label for="desde">Desde:</label>
+      <input id="desde" type="date" formControlName="desde">
+      <label for="hasta">Hasta:</label>
+      <input id="hasta" type="date" formControlName="hasta">
+      <button type="button" (click)="buscarPorFecha()">Buscar</button>
+    </div>
+    <div class="filter-row">
+      <label for="plan">Planes:</label>
+      <select id="plan" disabled>
+        <option *ngFor="let p of planes" [value]="p">{{ p }}</option>
+      </select>
+      <label for="docente">Docentes:</label>
+      <select id="docente" disabled>
+        <option *ngFor="let d of docentes" [value]="d">{{ d }}</option>
+      </select>
+    </div>
+  </form>
+
+  <table class="asistencias-table mt-4">
+    <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Fecha Registro</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let a of asistencias">
+      <td>{{ a.usuarioNombre }}</td>
+      <td>{{ a.fechaRegistroAsistencia | date:'yyyy‑MM‑dd' }}</td>
+      <td>
+        <ng-container [ngSwitch]="a.estadoAsistencia?.toLowerCase()">
+          <span *ngSwitchCase="'presente'">✔️</span>
+          <span *ngSwitchCase="'tardanza'">🕒</span>
+          <span *ngSwitchCase="'falta'">❌</span>
+          <span *ngSwitchDefault>{{ a.estadoAsistencia }}</span>
+        </ng-container>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary" (click)="openEditModal(a)">Editar</button>
+      </td>
+    </tr>
+    <tr *ngIf="asistencias.length === 0">
+      <td colspan="4" class="text-center">No hay asistencias registradas.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Estadísticas -->
+  <div class="stats-container mt-4">
+    <div class="stat-block">
+      <h4>Más faltas</h4>
+      <table>
+        <tr><th>Nombre</th><th>Cantidad</th></tr>
+        <tr *ngFor="let e of topFaltas">
+          <td>{{ e.usuarioNombre }}</td><td>{{ e.cantidad }}</td>
+        </tr>
+        <tr *ngIf="topFaltas.length === 0">
+          <td colspan="2" class="text-center">—</td>
+        </tr>
+      </table>
+    </div>
+    <div class="stat-block">
+      <h4>Más tardanzas</h4>
+      <table>
+        <tr><th>Nombre</th><th>Cantidad</th></tr>
+        <tr *ngFor="let e of topTardanzas">
+          <td>{{ e.usuarioNombre }}</td><td>{{ e.cantidad }}</td>
+        </tr>
+        <tr *ngIf="topTardanzas.length === 0">
+          <td colspan="2" class="text-center">—</td>
+        </tr>
+      </table>
+    </div>
+    <div class="stat-block">
+      <h4>Más presentes</h4>
+      <table>
+        <tr><th>Nombre</th><th>Cantidad</th></tr>
+        <tr *ngFor="let e of topPresentes">
+          <td>{{ e.usuarioNombre }}</td><td>{{ e.cantidad }}</td>
+        </tr>
+        <tr *ngIf="topPresentes.length === 0">
+          <td colspan="2" class="text-center">—</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ==== ADD VIEW ==== -->
+<div *ngIf="showAdd">
+  <h3>Registrar Nueva Asistencia</h3>
+  <form [formGroup]="addForm" class="filters-container">
+    <div class="filter-row">
+      <label for="new-usuario">Usuario:</label>
+      <input id="new-usuario" type="text" formControlName="usuarioNombre">
+    </div>
+    <div class="filter-row">
+      <label for="new-fecha">Fecha Registro:</label>
+      <input id="new-fecha" type="date" formControlName="fechaRegistroAsistencia">
+    </div>
+    <div class="filter-row">
+      <label for="new-estado">Estado:</label>
+      <select id="new-estado" formControlName="estadoAsistencia">
+        <option value="presente">✔️ Presente</option>
+        <option value="tardanza">🕒 Tardanza</option>
+        <option value="falta">❌ Falta</option>
+      </select>
+    </div>
+    <div class="filter-row">
+      <button type="button" class="btn btn-success" (click)="saveNew()">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelAdd()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal de edición -->
+<dialog #editDialog>
+  <form [formGroup]="editForm" class="filters-container">
+    <h3>Editar Asistencia</h3>
+
+    <div class="filter-row">
+      <label for="edit-usuario">Usuario ID:</label>
+      <input id="edit-usuario" type="number" formControlName="usuarioIdUsuario">
+    </div>
+
+    <div class="filter-row">
+      <label for="edit-fecha">Fecha Registro:</label>
+      <input id="edit-fecha" formControlName="fechaRegistroAsistencia" type="date">
+    </div>
+
+    <div class="filter-row">
+      <label for="edit-estado">Estado:</label>
+      <select id="edit-estado" formControlName="estadoAsistencia">
+        <option value="presente">✔️ Presente</option>
+        <option value="tardanza">🕒 Tardanza</option>
+        <option value="falta">❌ Falta</option>
+      </select>
+    </div>
+
+    <div class="filter-row">
+      <label for="curso">Curso ID:</label>
+      <input id="curso" type="number" formControlName="cursoIdCurso">
+    </div>
+
+    <div class="filter-row">
+      <label for="docente">Docente ID:</label>
+      <input id="docente" type="number" formControlName="docenteIdDocente">
+    </div>
+
+    <!-- Reemplazado: Input por Select -->
+    <div class="filter-row">
+      <label for="plan">Plan Académico:</label>
+      <select id="plan" formControlName="planAcademicoIdPlanAcademico">
+        <option *ngFor="let p of planes" [value]="p.id">{{ p.nombrePlan }}</option>
+      </select>
+    </div>
+
+    <div class="filter-row">
+      <button type="button" class="btn btn-primary" (click)="saveEdit()">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancelar</button>
+    </div>
+  </form>
+</dialog>

@@ -1,0 +1,66 @@
+<div class="container mt-4 mb-4">
+  <h2 class="text-center mb-4">Editar Antecedente Médico</h2>
+  <hr>
+  <form [formGroup]="antecedenteMedicoForm" (ngSubmit)="guardar()">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="edad" class="form-label fw-semibold">Edad</label>
+        <input id="edad" formControlName="edad" class="form-control form-control-custom-bg" placeholder="Ingrese la edad" />
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="altura" class="form-label fw-semibold">Altura (cm)</label>
+        <input id="altura" formControlName="altura" class="form-control form-control-custom-bg" placeholder="Ingrese la altura en cm" />
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="peso" class="form-label fw-semibold">Peso (kg)</label>
+        <input id="peso" formControlName="peso" class="form-control form-control-custom-bg" placeholder="Ingrese el peso en kg" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="grupoSanguineo" class="form-label fw-semibold">Grupo Sanguíneo</label>
+        <input id="grupoSanguineo" formControlName="grupoSanguineo" class="form-control form-control-custom-bg" placeholder="Ej: A+, O-, AB+" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="enfermedadesPadecidas" class="form-label fw-semibold">Enfermedades Padecidas</label>
+        <input id="enfermedadesPadecidas" formControlName="enfermedadesPadecidas" class="form-control form-control-custom-bg" placeholder="Describa enfermedades (si aplica)" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="antecedenteDeHospitalizacionoDeCirugias" class="form-label fw-semibold">Antecedente de Hospitalización o Cirugías</label>
+      <input id="antecedenteDeHospitalizacionoDeCirugias" formControlName="antecedenteDeHospitalizacionoDeCirugias" class="form-control form-control-custom-bg" placeholder="Describa cirugías/hospitalizaciones (si aplica)" />
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="seEncuentraMedicado" class="form-label fw-semibold">¿Se encuentra medicado?</label>
+        <input id="seEncuentraMedicado" formControlName="seEncuentraMedicado" class="form-control form-control-custom-bg" placeholder="Ej: Sí, No, Medicamentos" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="presentaDiscapacidad" class="form-label fw-semibold">¿Presenta alguna discapacidad?</label>
+        <input id="presentaDiscapacidad" formControlName="presentaDiscapacidad" class="form-control form-control-custom-bg" placeholder="Ej: Sí, No, Tipo de discapacidad" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="alergias" class="form-label fw-semibold">Alergias</label>
+      <input id="alergias" formControlName="alergias" class="form-control form-control-custom-bg" placeholder="Describa alergias (si aplica)" />
+    </div>
+
+    <div class="mb-3">
+      <label for="estadoPsicologico" class="form-label fw-semibold">Estado Psicológico</label>
+      <input id="estadoPsicologico" formControlName="estadoPsicologico" class="form-control form-control-custom-bg" placeholder="Ej: Estable, En tratamiento, etc." />
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>

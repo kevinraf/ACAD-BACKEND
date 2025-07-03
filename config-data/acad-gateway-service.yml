@@ -28,6 +28,34 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: asistencia-route
+          uri: lb://acad-asistencia-service
+          predicates:
+            - Path=/asistencias/**
+          filters:
+            - AuthFilter
+
+        - id: insidenciaHistorico-route
+          uri: lb://acad-insidenciaHistorico-service
+          predicates:
+            - Path=/api/insidencias/**
+          filters:
+            - AuthFilter
+
+        - id: libretasNotas-route
+          uri: lb://acad-asistencia-service
+          predicates:
+            - Path=/api/libretasNotas/**
+          filters:
+            - AuthFilter
+
+        - id: acad-notasAreaCurricular-service
+          uri: lb://acad-notasAreaCurricular-service
+          predicates:
+            - Path=/api/notasAreaCurriculars/**
+          filters:
+            - AuthFilter
+
         - id: acad-Institucion
           uri: lb://acad-Institucion
           predicates:

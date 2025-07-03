@@ -1,0 +1,53 @@
+<div class="container mt-4 mb-4">
+  <h2 class="text-center mb-4">Editar Antecedente Médico</h2>
+  <hr>
+  <form [formGroup]="apoderadoForm" (ngSubmit)="guardar()">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="nombres" class="form-label fw-semibold">Nombres</label>
+        <input id="nombres" formControlName="nombres" class="form-control form-control-custom-bg" placeholder="Ingrese los nombres" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="apellidoPaterno" class="form-label fw-semibold">Apellido Paterno</label>
+        <input id="apellidoPaterno" formControlName="apellidoPaterno" class="form-control form-control-custom-bg" placeholder="Ingrese el apellido paterno" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="apellidoMaterno" class="form-label fw-semibold">Apellido Materno</label>
+        <input id="apellidoMaterno" formControlName="apellidoMaterno" class="form-control form-control-custom-bg" placeholder="Ingrese el apellido materno" />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="fechaNacimiento" class="form-label fw-semibold">Fecha de Nacimiento</label>
+        <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" class="form-control form-control-custom-bg" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="direccion" class="form-label fw-semibold">Dirección</label>
+      <input id="direccion" formControlName="direccion" class="form-control form-control-custom-bg" placeholder="Ingrese la dirección completa" />
+    </div>
+
+    <div class="mb-4">
+      <label for="rolFamilia" class="form-label fw-semibold">Rol en la Familia:</label>
+      <select id="rolFamilia" formControlName="rolFamilia" class="form-control form-control-custom-bg">
+        <option value="">Seleccione el rol</option>
+        <option value="Padre">Padre</option>
+        <option value="Madre">Madre</option>
+        <option value="Hijo/a">Hijo/a</option>
+        <option value="Hermano/a">Hermano/a</option>
+        <option value="Tío/a">Tío/a</option>
+        <option value="Abuelo/a">Abuelo/a</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>

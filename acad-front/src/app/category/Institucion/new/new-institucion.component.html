@@ -1,0 +1,73 @@
+<form [formGroup]="institucionForm" (ngSubmit)="guardar()" class="card p-4 shadow-sm mb-4" style="background-color: #E0E1DD;">
+  <h5 class="text-center mb-3 text-primary fw-bold">Nueva Institución</h5>
+
+  <div class="mb-3">
+    <span class="fw-semibold">Formulario de Institución:</span>
+    <small class="text-muted">Complete los datos</small>
+  </div>
+
+  <div class="row g-3">
+    <!-- Nombre -->
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Nombre de la Institución:</label>
+      <input
+        type="text"
+        formControlName="nombre"
+        class="form-control"
+        placeholder="Ingrese el nombre de la institución" />
+      <div class="text-danger" *ngIf="institucionForm.get('nombre')?.invalid && institucionForm.get('nombre')?.touched">
+        El nombre es obligatorio.
+      </div>
+    </div>
+
+    <!-- Dirección -->
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Dirección:</label>
+      <input
+        type="text"
+        formControlName="direccion"
+        class="form-control"
+        placeholder="Ingrese la dirección" />
+      <div class="text-danger" *ngIf="institucionForm.get('direccion')?.invalid && institucionForm.get('direccion')?.touched">
+        La dirección es obligatoria.
+      </div>
+    </div>
+
+    <!-- Sede -->
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Sede:</label>
+      <select class="form-select" formControlName="idSede">
+        <option [ngValue]="null">Seleccione una sede</option>
+        <option *ngFor="let sede of sedes" [ngValue]="sede.idSede">
+          {{ sede.nombreSede }}
+        </option>
+      </select>
+      <div class="text-danger" *ngIf="institucionForm.get('idSede')?.invalid && institucionForm.get('idSede')?.touched">
+        La sede es obligatoria.
+      </div>
+    </div>
+
+    <!-- UGEL -->
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">UGEL:</label>
+      <select class="form-select" formControlName="idUgel">
+        <option [ngValue]="null">Seleccione una UGEL</option>
+        <option *ngFor="let ugel of ugeles" [ngValue]="ugel.idUgel">
+          {{ ugel.nombreDeLaUgel }}
+        </option>
+      </select>
+      <div class="text-danger" *ngIf="institucionForm.get('idUgel')?.invalid && institucionForm.get('idUgel')?.touched">
+        La UGEL es obligatoria.
+      </div>
+    </div>
+  </div>
+
+  <div class="text-end mt-4">
+    <button type="submit" class="btn btn-primary me-2" [disabled]="institucionForm.invalid">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+</form>

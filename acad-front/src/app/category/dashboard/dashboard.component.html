@@ -1,0 +1,124 @@
+<div class="dashboard-layout d-flex">
+  <!-- Sidebar -->
+  <aside class="sidebar bg-dark text-white p-3" style="width: 250px; height: 100vh; overflow-y: auto;">
+
+  <h4 class="mb-4 text-center">
+      <i class="bi bi-mortarboard-fill"></i> PEDRO PAULET
+    </h4>
+
+    <nav class="nav flex-column gap-2">
+
+      <hr class="border-light" />
+
+      <!-- Submenú: Servicios para Matrícula -->
+      <div>
+        <button
+          class="btn btn-outline-light w-100 text-start d-flex align-items-center justify-content-between"
+          (click)="submenuMatriculaAbierto = !submenuMatriculaAbierto"
+        >
+          <span><i class="bi bi-layers me-2"></i> Servicios para Matrícula</span>
+          <i class="bi" [ngClass]="submenuMatriculaAbierto ? 'bi-caret-up-fill' : 'bi-caret-down-fill'"></i>
+        </button>
+
+        <div class="submenu mt-2 ps-3" *ngIf="submenuMatriculaAbierto">
+          <a class="nav-link text-white" routerLink="/apoderado" routerLinkActive="active">
+            <i class="bi bi-people-fill me-2"></i> Apoderados
+          </a>
+          <a class="nav-link text-white" routerLink="/requisitos" routerLinkActive="active">
+            <i class="bi bi-list-check me-2"></i> Requisitos
+          </a>
+          <a class="nav-link text-white" routerLink="/antecedentes-medicos" routerLinkActive="active">
+            <i class="bi bi-file-earmark-medical me-2"></i> Antecedentes Médicos
+          </a>
+          <a class="nav-link text-white" routerLink="/matriculas" routerLinkActive="active">
+            <i class="bi bi-clipboard-data me-2"></i> Matrícula
+          </a>
+        </div>
+      </div>
+
+      <!-- Submenú: Servicios de Carga Académica -->
+      <div>
+        <button
+          class="btn btn-outline-light w-100 text-start d-flex align-items-center justify-content-between"
+          (click)="submenuCargaAbierto = !submenuCargaAbierto"
+        >
+          <span><i class="bi bi-layers me-2"></i> Servicios de Carga Académica</span>
+          <i class="bi" [ngClass]="submenuCargaAbierto ? 'bi-caret-up-fill' : 'bi-caret-down-fill'"></i>
+        </button>
+
+        <div class="submenu mt-2 ps-3" *ngIf="submenuCargaAbierto">
+          <a class="nav-link text-white" routerLink="/docentes" routerLinkActive="active">
+            <i class="bi bi-person-badge me-2"></i> Docentes
+          </a>
+          <a class="nav-link text-white" routerLink="/cursos" routerLinkActive="active">
+            <i class="bi bi-book-half me-2"></i> Cursos
+          </a>
+          <a class="nav-link text-white" routerLink="/planacademico" routerLinkActive="active">
+            <i class="bi bi-diagram-3 me-2"></i> Plan Académico
+          </a>
+        </div>
+      </div>
+
+      <!-- Submenú: Servicios de Institucion -->
+      <div>
+        <button
+          class="btn btn-outline-light w-100 text-start d-flex align-items-center justify-content-between"
+          (click)="submenuInstituciones = !submenuInstituciones"
+        >
+          <span><i class="bi bi-layers me-2"></i> Servicio de Institucion</span>
+          <i class="bi" [ngClass]="submenuInstituciones ? 'bi-caret-up-fill' : 'bi-caret-down-fill'"></i>
+        </button>
+
+        <div class="submenu mt-2 ps-3" *ngIf="submenuInstituciones">
+          <a class="nav-link text-white" routerLink="/ugeles" routerLinkActive="active">
+            <i class="bi bi-person-badge me-2"></i> UGEL-S
+          </a>
+          <a class="nav-link text-white" routerLink="/sedes" routerLinkActive="active">
+            <i class="bi bi-book-half me-2"></i> SEDES
+          </a>
+          <a class="nav-link text-white" routerLink="/institucion" routerLinkActive="active">
+            <i class="bi bi-diagram-3 me-2"></i> INSTITUCIONES
+          </a>
+        </div>
+      </div>
+
+
+      <!-- Submenú: Servicios de ASISTENCIA -->
+      <div>
+        <button
+          class="btn btn-outline-light w-100 text-start d-flex align-items-center justify-content-between"
+          (click)="submenuAsistencia = !submenuAsistencia"
+        >
+          <span><i class="bi bi-layers me-2"></i> Servicio de Control Estudantil</span>
+          <i class="bi" [ngClass]="submenuAsistencia ? 'bi-caret-up-fill' : 'bi-caret-down-fill'"></i>
+        </button>
+
+        <div class="submenu mt-2 ps-3" *ngIf="submenuAsistencia">
+          <a class="nav-link text-white" routerLink="/asistencia" routerLinkActive="active">
+            <i class="bi bi-person-badge me-2"></i> Asistencia
+          </a>
+        </div>
+      </div>
+
+
+
+      <div class="mt-auto pt-3 border-top text-center">
+        <button class="btn btn-outline-light w-100" (click)="logout()">
+          <i class="bi bi-box-arrow-right me-2"></i> CERRAR SECIÓN
+        </button>
+      </div>
+
+      <div class="mt-auto pt-3 border-top text-center">
+        <button class="btn btn-outline-light w-100" (click)="logoutt()">
+          <i class="bi bi-box-arrow-right me-2"></i> Volver al inicio
+        </button>
+      </div>
+
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content flex-grow-1 p-4 bg-light">
+    <router-outlet></router-outlet>
+  </main>
+</div>

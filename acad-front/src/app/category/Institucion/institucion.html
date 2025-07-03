@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div class="mb-3 text-end">
+    <button class="btn btn-success" (click)="mostrarFormularioNuevo()">Agregar nueva institución</button>
+  </div>
+
+  <app-new-institucion *ngIf="nuevaInstitucionVisible"
+                       (onGuardar)="onNuevaInstitucionGuardada()"
+                       (onCancelar)="mostrarFormularioNuevo()"></app-new-institucion>
+
+  <div class="table-responsive">
+    <table class="table clean-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Sede</th>
+        <th>UGEL</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (institucion of institucion; track institucion?.id) {
+          <tr>
+            <td>{{ institucion.id }}</td>
+            <td>{{ institucion.nombre }}</td>
+            <td>{{ institucion.direccion }}</td>
+            <td>{{ institucion.sede?.nombreSede }}</td>
+            <td>{{ institucion.ugel?.nombreDeLaUgel }}</td>
+
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(institucion.id)">Editar</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="eliminar(institucion.id)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="text-center">No hay instituciones registradas.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

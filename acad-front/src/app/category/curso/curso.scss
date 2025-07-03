@@ -1,0 +1,27 @@
+.contenedor-curso {
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+  }
+
+  button {
+    margin-right: 8px;
+    padding: 6px 10px;
+  }
+}

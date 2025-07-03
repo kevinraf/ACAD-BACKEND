@@ -1,0 +1,70 @@
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<!-- 📝 FORMULARIO DE REGISTRO -->
+<form (ngSubmit)="register()" #registerForm="ngForm" class="register-container container">
+  <h2 class="text-center mb-4 text-success">
+    <i class="fas fa-user-plus me-2"></i> Registro
+  </h2>
+
+  <!-- Usuario -->
+  <div class="mb-3">
+    <label for="user" class="form-label">Usuario</label>
+    <input
+      type="text"
+      id="user"
+      name="user"
+      [(ngModel)]="user"
+      required
+      class="form-control"
+      placeholder="Ej: juanperez123">
+  </div>
+
+  <!-- Contraseña con OJO -->
+  <div class="mb-3 position-relative">
+    <label for="password" class="form-label">Contraseña</label>
+    <div class="input-group">
+      <input
+        [type]="passwordVisible ? 'text' : 'password'"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        class="form-control"
+        placeholder="Escribe tu contraseña">
+      <button type="button" class="btn btn-outline-secondary" (click)="passwordVisible = !passwordVisible">
+        <i class="fa" [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Cargo -->
+  <div class="mb-4">
+    <label for="cargo" class="form-label">Cargo</label>
+    <select
+      id="cargo"
+      name="cargo"
+      [(ngModel)]="cargo"
+      required
+      class="form-select">
+      <option value="" disabled selected>Seleccione un cargo</option>
+      <option value="DOCENTE">Docente</option>
+      <option value="ESTUDIANTE">Estudiante</option>
+      <option value="PADRE">Padre</option>
+    </select>
+  </div>
+
+  <!-- Botón Registrarse -->
+  <button type="submit" class="btn btn-success w-100 fw-bold" [disabled]="!registerForm.valid">
+    <i class="fas fa-user-check me-2"></i> Registrarse
+  </button>
+
+  <!-- Link a login -->
+  <p class="text-center mt-4 mb-0 text-muted">
+    ¿Ya tienes una cuenta?
+
+    <a href="http://localhost:4200/login" class="text-success fw-bold text-decoration-none">Inicia sesión aquí</a>
+  </p>
+</form>

@@ -1,0 +1,17 @@
+<form [formGroup]="sedeForm" (ngSubmit)="guardar()" class="card p-4 shadow-sm">
+  <h5 class="text-center text-primary fw-bold">Registrar Nueva Sede</h5>
+
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Nombre de la Sede:</label>
+    <input type="text" class="form-control" formControlName="nombreSede" placeholder="Ej: Sede Central">
+  </div>
+
+  <div class="text-end">
+    <button type="submit" class="btn btn-primary me-2" [disabled]="sedeForm.invalid">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+</form>

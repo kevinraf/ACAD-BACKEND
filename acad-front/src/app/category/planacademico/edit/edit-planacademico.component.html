@@ -1,0 +1,29 @@
+<div class="container mt-4 mb-4">
+  <h2 class="text-center mb-4">Editar Plan Académico</h2>
+  <hr>
+  <form [formGroup]="planForm" (ngSubmit)="guardar()">
+    <div class="mb-3">
+      <label for="nombrePlanacademico" class="form-label fw-semibold">Nombre del Plan Académico</label>
+      <input id="nombrePlanacademico" type="text" formControlName="nombrePlanacademico" class="form-control form-control-custom-bg" placeholder="Ingrese el nombre del plan" />
+    </div>
+
+    <div class="mb-3">
+      <label for="descripcionPlanacademico" class="form-label fw-semibold">Descripción</label>
+      <input id="descripcionPlanacademico" type="text" formControlName="descripcionPlanacademico" class="form-control form-control-custom-bg" placeholder="Ingrese una breve descripción" />
+    </div>
+
+    <div class="mb-4">
+      <label for="estadoPlanacademico" class="form-label fw-semibold">Estado:</label>
+      <select id="estadoPlanacademico" class="form-select form-control-custom-bg" formControlName="estadoPlanacademico">
+        <option value="" disabled selected>Seleccione estado</option>
+        <option value="ACTIVO">ACTIVO</option>
+        <option value="INACTIVO">INACTIVO</option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="planForm.invalid">Guardar</button>
+    </div>
+  </form>
+</div>

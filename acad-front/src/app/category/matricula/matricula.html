@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between mb-3">
+    <button class="btn btn-success" (click)="mostrarFormularioNuevo()">Agregar nueva Matricula</button>
+
+    <!-- ✅ Botón para exportar PDF -->
+    <button class="btn btn-outline-danger" (click)="descargarPdf()">
+      <i class="bi bi-file-earmark-pdf"></i> Exportar PDF
+    </button>
+  </div>
+
+  <app-new-matricula *ngIf="nuevoMatriculaVisible"
+                     (onGuardar)="onNuevoMatriculaGuardado()"
+                     (onCancelar)="mostrarFormularioNuevo()"></app-new-matricula>
+
+  <div class="table-responsive">
+    <table class="table clean-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Plan Académico</th>
+        <th>Institución</th>
+        <th>Usuario</th>
+        <th>Código Matrícula</th>
+        <th>Nivel</th>
+        <th>DNI Estudiante</th>
+        <th>Apoderado</th>
+        <th>Antecedente Médico</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (matricula of matriculas; track matricula?.idMatricula) {
+          <tr>
+            <td>{{ matricula.idMatricula }}</td>
+            <td>{{ matricula.planAcademico }}</td>
+            <td>{{ matricula.institucion }}</td>
+            <td>{{ matricula.usuario }}</td>
+            <td>{{ matricula.codigoMatricula }}</td>
+            <td>{{ matricula.nivel }}</td>
+            <td>{{ matricula.requisitos?.dniEstudiante }}</td>
+            <td>{{ matricula.requisitos?.idApoderado }}</td>
+            <td>{{ matricula.requisitos?.idAntecedenteMedico }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(matricula.idMatricula)">Editar</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="eliminar(matricula.idMatricula)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="10" class="text-center">No hay matrículas registradas.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <div class="mb-3 text-end">
+    <button class="btn btn-success" (click)="mostrarFormularioNuevo()">Agregar nuevo apoderado</button>
+  </div>
+
+  <app-new-apoderado *ngIf="nuevoApoderadoVisible"
+                     (onGuardar)="onNuevoGuardado()"
+                     (onCancelar)="mostrarFormularioNuevo()"></app-new-apoderado>
+
+
+  <div class="table-responsive">
+    <table class="table clean-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombres</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>Fecha Nacimiento</th>
+        <th>Dirección</th>
+        <th>Rol Familiar</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (apoderado of apoderados; track apoderado?.idApoderado) {
+          <tr>
+            <td>{{ apoderado.idApoderado }}</td>
+            <td>{{ apoderado.nombres }}</td>
+            <td>{{ apoderado.apellidoPaterno }}</td>
+            <td>{{ apoderado.apellidoMaterno }}</td>
+            <td>{{ apoderado.fechaNacimiento }}</td>
+            <td>{{ apoderado.direccion }}</td>
+            <td>{{ apoderado.rolFamilia }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(apoderado.idApoderado)">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="eliminar(apoderado.idApoderado)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="text-center">No hay apoderados registrados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <div class="mb-3 text-end">
+    <button class="btn btn-success" (click)="mostrarFormularioNuevo()">Agregar nuevo Antecedente Medico</button>
+  </div>
+
+  <app-new-antecedente-medico *ngIf="nuevoAntecedenteMedicoVisible"
+                     (onGuardar)="onNuevoGuardado()"
+                     (onCancelar)="mostrarFormularioNuevo()"></app-new-antecedente-medico>
+
+
+  <div class="table-responsive">
+    <table class="table clean-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Edad</th>
+        <th>Altura</th>
+        <th>Peso</th>
+        <th>Grupo Sanguineo</th>
+        <th>Enfermedades Padecidas</th>
+        <th>Antecedente de Hospitalizacion o de Cirugia</th>
+        <th>Se Encuentra Medicado</th>
+        <th>Presenta Discapacidad</th>
+        <th>Alergias</th>
+        <th>Estado Psicologico</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (antedecenteMedico of antecedentesMedicos; track antedecenteMedico?.idAntecedenteMedico) {
+          <tr>
+            <td>{{ antedecenteMedico.idAntecedenteMedico }}</td>
+            <td>{{ antedecenteMedico.edad }}</td>
+            <td>{{ antedecenteMedico.altura }}</td>
+            <td>{{ antedecenteMedico.peso }}</td>
+            <td>{{ antedecenteMedico.grupoSanguineo }}</td>
+            <td>{{ antedecenteMedico.enfermedadesPadecidas }}</td>
+            <td>{{ antedecenteMedico.antecedenteDeHospitalizacionoDeCirugias }}</td>
+            <td>{{ antedecenteMedico.seEncuentraMedicado }}</td>
+            <td>{{ antedecenteMedico.presentaDiscapacidad }}</td>
+            <td>{{ antedecenteMedico.alergias }}</td>
+            <td>{{ antedecenteMedico.estadoPsicologico }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(antedecenteMedico.idAntecedenteMedico)">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="eliminar(antedecenteMedico.idAntecedenteMedico)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="text-center">No hay Antecedentes Medicos registrados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

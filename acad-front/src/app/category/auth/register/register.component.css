@@ -1,0 +1,40 @@
+body {
+  background: linear-gradient(135deg, #83bb79, #0e4d12); /* verde pastel suave */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.register-container {
+  max-width: 450px;
+  background: rgba(168, 199, 144, 0.95); /* fondo semi-transparente */
+  border-radius: 20px;
+  padding: 2rem;
+  margin-top: 5rem;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #56ab2f;
+  box-shadow: 0 0 0 0.25rem rgba(86, 171, 47, 0.25);
+}
+
+.eye-btn {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 35px;
+  right: 15px;
+  cursor: pointer;
+  color: #666;
+}
+
+h2 {
+  color: #2f7236;
+  font-weight: bold;
+}

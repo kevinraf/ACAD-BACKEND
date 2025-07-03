@@ -9,6 +9,11 @@ import java.util.List;
 
 public interface AsistenciaRepository extends JpaRepository<Asistencia, Integer> {
 
+    // 1. Listar por usuario (ID)
+    List<Asistencia> findByUsuarioIdUsuario(Long usuarioId);
+
+    // 2. Listar por curso (ID)
+    List<Asistencia> findByCursoIdCurso(Integer cursoId);
 
     // 3. Listar por rango de fechas
     List<Asistencia> findByFechaRegistroAsistenciaBetween(

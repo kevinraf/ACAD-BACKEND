@@ -1,0 +1,36 @@
+<div class="contenedor-curso">
+  <h2>Gestión de Cursos</h2>
+  <button (click)="mostrarFormularioNuevo()">
+    {{ nuevoCursoVisible ? 'Cancelar' : 'Nuevo Curso' }}
+  </button>
+
+  <app-new-curso
+    *ngIf="nuevoCursoVisible"
+    (onGuardar)="onNuevoGuardado()"
+    (onCancelar)="mostrarFormularioNuevo()"
+  ></app-new-curso>
+
+  <table *ngIf="cursos.length > 0">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Horas Semanales</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let curso of cursos">
+      <td>{{ curso.nombreCurso }}</td>
+      <td>{{ curso.descripcionCurso }}</td>
+      <td>{{ curso.horasSemanalesCurso }}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(curso.idCurso)">Editar</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="eliminar(curso.idCurso)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p colspan="8" class="text-center" *ngIf="cursos.length === 0">No hay cursos registrados.</p>
+</div>

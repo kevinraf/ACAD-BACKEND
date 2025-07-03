@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <div class="mb-3 text-end">
+    <button class="btn btn-success" (click)="mostrarFormularioNuevo()">Agregar nuevo requisito</button>
+  </div>
+
+  <app-new-requisito *ngIf="nuevoRequisitoVisible"
+                     (onGuardar)="onNuevoRequisitoGuardado()"
+                     (onCancelar)="mostrarFormularioNuevo()"></app-new-requisito>
+
+  <div class="table-responsive">
+    <table class="table clean-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>DNI Estudiante</th>
+        <th>Partida Nacimiento</th>
+        <th>Resolución Rectoral</th>
+        <th>Certificado de Estudio</th>
+        <th>Ficha SIAGE</th>
+        <th>Const. Comportamiento</th>
+        <th>Const. No Adeudo</th>
+        <th>Familiar Militar</th>
+        <th>Apoderado</th>
+        <th>Antecedente Médico</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (requisito of requisitos; track requisito?.idRequisitos) {
+          <tr>
+            <td>{{ requisito.idRequisitos }}</td>
+            <td>{{ requisito.dniEstudiante }}</td>
+            <td>{{ requisito.partidaNacimientoOriginal }}</td>
+            <td>{{ requisito.resolucionRectoralDeTraslado }}</td>
+            <td>{{ requisito.certificadoDeEstudio }}</td>
+            <td>{{ requisito.fichaMatriculaGeneradoPorSIAGE }}</td>
+            <td>{{ requisito.constanciaDeComportamiento }}</td>
+            <td>{{ requisito.constanciaDeNoAdeudo }}</td>
+            <td>{{ requisito.familiarMilitar }}</td>
+            <td>{{ requisito.apoderado?.nombres }} {{ requisito.apoderado?.apellidoPaterno }}</td>
+            <td>{{ requisito.antecedenteMedico?.grupoSanguineo }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(requisito.idRequisitos)">Editar</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="eliminar(requisito.idRequisitos)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="12" class="text-center">No hay requisitos registrados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>

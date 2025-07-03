@@ -1,0 +1,30 @@
+<form [formGroup]="planForm" (ngSubmit)="guardar()" class="border p-4 rounded bg-light mt-3">
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label class="form-label">Nombre:</label>
+      <input type="text" formControlName="nombrePlanacademico" class="form-control" />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Descripción:</label>
+      <input type="text" formControlName="descripcionPlanacademico" class="form-control" />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label fw-semibold">Estado:</label>
+      <select class="form-select" formControlName="estadoPlanacademico">
+        <option value="" disabled selected>Seleccione estado</option>
+        <option value="ACTIVO">ACTIVO</option>
+        <option value="INACTIVO">INACTIVO</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button type="submit" class="btn btn-success" [disabled]="planForm.invalid">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+</form>

@@ -1,0 +1,28 @@
+form {
+  margin-top: 16px;
+
+  div {
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: inline-block;
+    width: 150px;
+  }
+
+  input {
+    padding: 4px;
+    width: 250px;
+  }
+
+  button {
+    margin-right: 8px;
+    padding: 6px 12px;
+  }
+}
+
+.form-control-custom-bg {
+  background-color: #bec8d5; /* Un plomo muy claro, casi blanco grisáceo */
+  /* Opcional: Para un plomo un poco más oscuro
+  background-color: #e9ecef; */
+}

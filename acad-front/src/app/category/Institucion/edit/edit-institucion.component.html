@@ -1,0 +1,26 @@
+<h2>Editar Institución</h2>
+
+<form [formGroup]="institucionForm" (ngSubmit)="guardar()">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre de la Institución</label>
+    <input id="nombre" formControlName="nombre" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label for="direccion" class="form-label">Dirección</label>
+    <input id="direccion" formControlName="direccion" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label for="ugelId" class="form-label">ID de UGEL</label>
+    <input id="ugelId" type="number" formControlName="ugelId" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label for="sedeId" class="form-label">ID de Sede</label>
+    <input id="sedeId" type="number" formControlName="sedeId" class="form-control" />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
+  <button type="button" class="btn btn-secondary ms-2" (click)="cancelar()">Cancelar</button>
+</form>

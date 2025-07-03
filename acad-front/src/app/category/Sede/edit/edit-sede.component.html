@@ -1,0 +1,25 @@
+<form [formGroup]="sedeForm" (ngSubmit)="guardar()" class="card p-4 shadow-sm mb-4" style="background-color: #F0F0F0;">
+  <h5 class="text-center mb-3 text-primary fw-bold">Editar Sede</h5>
+
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Nombre de la Sede:</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="nombreSede"
+      placeholder="Ingrese el nombre de la sede"
+    />
+    <div *ngIf="sedeForm.get('nombreSede')?.invalid && sedeForm.get('nombreSede')?.touched" class="text-danger mt-1">
+      El nombre es obligatorio.
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button type="submit" class="btn btn-primary me-2" [disabled]="sedeForm.invalid">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">
+      <i class="bi bi-x-circle"></i> Cancelar
+    </button>
+  </div>
+</form>
